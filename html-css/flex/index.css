@@ -1,0 +1,129 @@
+@font-face {
+    font-family: "Larsseit";
+    src: url("fonts/Larsseit.ttf");
+}
+
+body{
+    background-color: #F4F9E2;
+    font-family: "Larsseit";
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 0px 15px;
+}
+
+.container-main{
+    max-width: 500px;
+}
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 10%;
+}
+
+
+
+
+.logo{
+    font-family: "Larsseit";
+    font-size: 24px;
+    line-height: 26.72px;
+    letter-spacing: -0.035em;
+    color: #62D0DF;
+}
+.logo-wrapper{
+    flex-grow: 2;
+    
+}
+
+.menu-wrapper{
+    flex-grow: 4;
+    display: flex;
+    justify-content: center;
+}
+.menu{
+    display: inline-block;
+    padding-left: 0;
+}
+.menu li{
+    display: inline-block;
+    line-height: 16px;
+    color: #22356F;
+}
+
+.contact-wrapper{
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-btn-back{
+}
+
+.btn{
+    text-transform: uppercase;
+    font-family: "Larsseit";
+    border-radius: 50px;
+    padding: 15px 40px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+.contact-btn{
+    color: white;
+    background-color: #62D0DF;
+}
+
+.who-btn{
+    background-color: #F9B640;
+    color:white;
+    border-radius: 0%;
+    border:0;
+}
+
+.what-do-btn{
+    background-color: #F4F9E2;
+    border-radius: 0%;
+    border: 0;
+    color:#F9B640;
+}
+
+.slogan{
+    font-size: 48px;
+    line-height: 53px;
+    color: #22356F;
+}
+
+.description{
+    font-size: 24px;
+    color: #22356F;
+    line-height: 42px;
+
+}
+
+@media (max-width:1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
+
+@media (max-width:992px) {
+    .container{
+        max-width: 750px;
+    }
+}
+
+@media (max-width:767px) {
+    .container{
+        max-width: none;
+    }
+    .nav{
+        flex-direction: column;
+    }
+}
