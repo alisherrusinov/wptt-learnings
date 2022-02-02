@@ -34,7 +34,7 @@ $ears_count = 2;
 $tail_len = 27;
 $cat_color = 'черного';
 $foot_color = 'белого';
-$BABABABABABA = 'черного';
+$new_foot_color = 'черного';	
 $fall_object = 'тазик';
 $fall_object_fill = 'с мазутом';
 
