@@ -47,52 +47,30 @@
 
 
                 <?php
-                if (array_key_exists('login', $_GET)) {
-                    if ($_GET['login'] == 'yes' && empty($_POST)) {
-                        echo <<<HTML
-                            <div class="index-auth">
-                        <form action="" method="POST">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="iat">
-                                    <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="iat">
-                                    <label for="password_id">Ваш пароль:</label>
-                                    <input id="password_id" size="30" name="password" type="password">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" value="Войти"></td>
-                            </tr>
-                        </table>
-                    </form>
-                    </div>
-                    HTML;
-                    }
-                }
                 $login = '';
                 $password = '';
                 require 'login.php';
-
-                ?>
-
-                <div class="index-auth">
+                $loginAndPassword = login($_POST);
+                if(is_array($loginAndPassword)){
+                    $login = $loginAndPassword[0];
+                    $password = $loginAndPassword[1];
+                }
+                if (array_key_exists('login', $_GET)) {
+                    if ($_GET['login'] == 'yes') {
+                    echo <<<html
+                    <div class="index-auth">
                     <form action="" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="iat">
                                     <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login" value="<?=($login) ? $login : "" ;?>">
+                                    <input id="login_id" size="30" name="login" value="$login">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iat">
                                     <label for="password_id">Ваш пароль:</label>
-                                    <input id="password_id" size="30" name="password" type="password" value="<?=($password) ? $password : "" ;?>">
+                                    <input id="password_id" size="30" name="password" type="password" value="$password">
                                 </td>
                             </tr>
                             <tr>
@@ -101,6 +79,13 @@
                         </table>
                     </form>
                 </div>
+                html;
+                    }
+                }
+
+                ?>
+
+                
 
             </td>
         </tr>
