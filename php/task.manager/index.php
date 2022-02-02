@@ -1,3 +1,4 @@
+<?php require 'logic.php'?>
 <!DOCTYPE html>
 <html>
 
@@ -45,40 +46,19 @@
                     <div class="clearfix"></div>
                 </div>
 
-
-                <?php
-                require 'login.php';
-                $login = '';
-                $password = '';
-                if(!empty($_POST)){
-                    $login = $_POST['login'];
-                    $password = $_POST['password'];
-                    $successAuth = login($login, $password);
-                    if($successAuth){
-                        require 'include/success_message.php';
-                        $login = '';
-                        $password = '';
-                    }
-                    else{
-                        require 'include/error_message.php';
-                    }
-                }
-                if (array_key_exists('login', $_GET)) {
-                    if ($_GET['login'] == 'yes') {
-                    echo <<<html
-                    <div class="index-auth">
+                <div class="index-auth" <?php if(!array_key_exists('login', $_GET)) {echo 'style="display:none;"';} ?> >
                     <form action="" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="iat">
                                     <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login" value="$login">
+                                    <input id="login_id" size="30" name="login" value="<?php echo $login; ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iat">
                                     <label for="password_id">Ваш пароль:</label>
-                                    <input id="password_id" size="30" name="password" type="password" value="$password">
+                                    <input id="password_id" size="30" name="password" type="password" value="<?php echo $password; ?>">
                                 </td>
                             </tr>
                             <tr>
@@ -87,11 +67,7 @@
                         </table>
                     </form>
                 </div>
-                html;
-                    }
-                }
 
-                ?>
 
                 
 
