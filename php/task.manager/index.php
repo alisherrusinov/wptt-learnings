@@ -47,13 +47,21 @@
 
 
                 <?php
+                require 'login.php';
                 $login = '';
                 $password = '';
-                require 'login.php';
-                $loginAndPassword = login($_POST);
-                if(is_array($loginAndPassword)){
-                    $login = $loginAndPassword[0];
-                    $password = $loginAndPassword[1];
+                if(!empty($_POST)){
+                    $login = $_POST['login'];
+                    $password = $_POST['password'];
+                    $successAuth = login($login, $password);
+                    if($successAuth){
+                        require 'include/success_message.php';
+                        $login = '';
+                        $password = '';
+                    }
+                    else{
+                        require 'include/error_message.php';
+                    }
                 }
                 if (array_key_exists('login', $_GET)) {
                     if ($_GET['login'] == 'yes') {

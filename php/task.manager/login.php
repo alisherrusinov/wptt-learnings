@@ -1,26 +1,16 @@
 <?php
 
-function login($_POST_){
-    if (!empty($_POST_)) {
+function login($login, $password)
+{
     require 'data/passwords.php';
     require 'data/users.php';
-    if (in_array($_POST_['login'], $userLogins) && in_array($_POST_['password'], $userPasswords)) {
-        if (array_search($_POST_['login'], $userLogins) == array_search($_POST_['password'], $userPasswords)) {
-            require 'include/success_message.php';
+    if (in_array($login, $userLogins) && in_array($password, $userPasswords)) {
+        if (array_search($login, $userLogins) == array_search($password, $userPasswords)) {
+            return true;
         } else {
-            $password = $_POST_['password'];
-            $login = $_POST_['login'];
-            require 'include/error_message.php';
-            return [$login, $password];
+            return false;
         }
     } else {
-        $password = $_POST_['password'];
-        $login = $_POST_['login'];
-        require 'include/error_message.php';
-        return [$login, $password];
+        return false;
     }
 }
-else{
-    return false;}
-}
-?>
