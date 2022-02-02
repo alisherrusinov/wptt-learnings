@@ -48,7 +48,7 @@
 
                 <?php
                 if (array_key_exists('login', $_GET)) {
-                    if ($_GET['login'] == 'yes' and count($_POST) == 0) {
+                    if ($_GET['login'] == 'yes' && empty($_POST)) {
                         echo <<<HTML
                             <div class="index-auth">
                         <form action="" method="POST">
@@ -74,29 +74,25 @@
                     HTML;
                     }
                 }
-                if (count($_POST) > 0) {
-                    require 'data/passwords.php';
-                    require 'data/users.php';
-                    if (in_array($_POST['login'], $userLogins) and in_array($_POST['password'], $userPasswords)) {
-                        if (array_search($_POST['login'], $userLogins) == array_search($_POST['password'], $userPasswords)) {
-                            require 'include/success_message.php';
-                        } else {
-                            $password = $_POST['password'];
-                            $login = $_POST['login'];
-                            echo <<<HTML
-                            <div class="index-auth">
-                        <form action="" method="POST">
+                $login = '';
+                $password = '';
+                require 'login.php';
+
+                ?>
+
+                <div class="index-auth">
+                    <form action="" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="iat">
                                     <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login" value="$login">
+                                    <input id="login_id" size="30" name="login" value="<?=($login) ? $login : "" ;?>">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iat">
                                     <label for="password_id">Ваш пароль:</label>
-                                    <input id="password_id" size="30" name="password" type="password" value="$password">
+                                    <input id="password_id" size="30" name="password" type="password" value="<?=($password) ? $password : "" ;?>">
                                 </td>
                             </tr>
                             <tr>
@@ -104,40 +100,7 @@
                             </tr>
                         </table>
                     </form>
-                    </div>
-                    HTML;
-                            require 'include/error_message.php';
-                        }
-                    } else {
-                        $password = $_POST['password'];
-                        $login = $_POST['login'];
-                        echo <<<HTML
-                        <div class="index-auth">
-                    <form action="" method="POST">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td class="iat">
-                                <label for="login_id">Ваш e-mail:</label>
-                                <input id="login_id" size="30" name="login" value="$login">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="iat">
-                                <label for="password_id">Ваш пароль:</label>
-                                <input id="password_id" size="30" name="password" type="password" value="$password">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" value="Войти"></td>
-                        </tr>
-                    </table>
-                </form>
                 </div>
-                HTML;
-                        require 'include/error_message.php';
-                    }
-                }
-                ?>
 
             </td>
         </tr>
