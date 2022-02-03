@@ -47,6 +47,7 @@
                 </div>
 
                 <div class="index-auth" <?php if(!array_key_exists('login', $_GET)) {echo 'style="display:none;"';} ?> >
+                <?php if(!$successAuth){ require 'include/error_message.php';} else { require 'include/success_message.php'; }?>
                     <form action="" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>

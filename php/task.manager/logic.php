@@ -7,12 +7,8 @@ require 'login.php';
      $password = $_POST['password'];
      $successAuth = login($login, $password);
      if($successAuth){
-         require 'include/success_message.php';
          $login = '';
          $password = '';
-     }
-     else{
-         require 'include/error_message.php';
      }
  }
 ?>
