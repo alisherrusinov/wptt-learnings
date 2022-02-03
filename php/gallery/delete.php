@@ -9,9 +9,12 @@ if (!empty($_POST)) {
                 }
             }
         }
-    } else {
-        foreach ($_POST['images'] as $key => $value) {
-            unlink($value);
+    }
+    else {
+        if(array_key_exists('images', $_POST)) {
+            foreach($_POST['images'] as $key => $value) {
+                unlink($value);
+            }
         }
     }
 }

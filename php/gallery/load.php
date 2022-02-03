@@ -7,11 +7,9 @@ function load_images($directory, $allowed_types = ['jpg', 'png', 'jpeg'])
   $title = "";
   $i = 0;
   $dirHandle = @opendir($directory) or die("Ошибка при открытии папки !!!");
-  echo '<div class="container">';
   while ($file = readdir($dirHandle)) {
     if ($file == "." || $file == "..") continue;
-    $fileParts = explode(".", $file);
-    $ext = strtolower(array_pop($fileParts));
+    $ext = pathinfo($file)['extension'];
     if (in_array($ext, $allowed_types)) {
       $i++;
       $allPhotos = $allPhotos . $directory . '/' . $file . ';';
@@ -21,7 +19,12 @@ function load_images($directory, $allowed_types = ['jpg', 'png', 'jpeg'])
 
   closedir($dirHandle);
   $answer = [];
-  $answer[] = $allFiles;
-  $answer[] = $allPhotos;
+  $answer['files'] = $allFiles;
+  $answer['photos'] = $allPhotos;
   return $answer;
 }
+
+$answer = load_images('upload', array('jpg', 'png', 'jpeg'));
+$allFiles = $answer['files'];
+$allPhotos = $answer['photos'];
+?>

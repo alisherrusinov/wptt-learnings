@@ -4,7 +4,7 @@ img{
 }
 .container{
     display: flex;
-    flex-direction:row; 
+    flex-direction:row;
 }
 .blok_img{
     max-width: 25%;
