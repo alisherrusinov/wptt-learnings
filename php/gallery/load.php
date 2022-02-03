@@ -1,7 +1,7 @@
 <?php
 function load_images($directory, $allowed_types = ['jpg', 'png', 'jpeg'])
 {
-  $file_parts = array();
+  $allFiles = [];
   $allPhotos = '';
   $ext = "";
   $title = "";
@@ -13,15 +13,15 @@ function load_images($directory, $allowed_types = ['jpg', 'png', 'jpeg'])
     $fileParts = explode(".", $file);
     $ext = strtolower(array_pop($fileParts));
     if (in_array($ext, $allowed_types)) {
-      echo '<div class = "blok_img">
-                                      <img src="' . $directory . '/' . $file . '" class="pimg" title="' . $file . '"/><br>';
-      echo ' <span>Дата создания ' .  date("d.m.Y", filectime($directory . '/' . $file)) . '</span><br>';
-      echo ' <input type="checkbox" name="images[]" value="' . $directory . '/' . $file .  '" class="check"></div>';
       $i++;
       $allPhotos = $allPhotos . $directory . '/' . $file . ';';
+      $allFiles[] = $directory . '/' . $file;
     }
   }
-  echo '<input type="hidden" name="allPhotos" value=' . $allPhotos . '>';
-  echo '</div>';
+
   closedir($dirHandle);
+  $answer = [];
+  $answer[] = $allFiles;
+  $answer[] = $allPhotos;
+  return $answer;
 }

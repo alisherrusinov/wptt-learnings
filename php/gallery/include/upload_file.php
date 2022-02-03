@@ -7,6 +7,7 @@ function replaceSymbols($fileName)
     $allowableSymbols = array_merge($numbers, $alphas);
     $allowableSymbols[] = '-';
     $allowableSymbols[] = '_';
+    $allowableSymbols[] = '.';
     $fileNameLen = strlen($fileName);
     for ($i = 0; $i < $fileNameLen; $i++) {
         if (!in_array(strtolower($fileName[$i]), $allowableSymbols)) {
@@ -22,7 +23,12 @@ if (!empty($_FILES)) {
         for ($i = 0; $i < $countfiles; $i++) {
             $filename = $_FILES['userfile']['name'][$i];
             $filename = replaceSymbols($filename);
-            move_uploaded_file($_FILES['userfile']['tmp_name'][$i], 'images/' . $filename);
+            if (($_FILES["userfile"]["size"][$i] > 2000000)) {
+                $msg = "Image File Size is Greater than 2MB.";
+                echo $msg;
+                break;
+            }
+            move_uploaded_file($_FILES['userfile']['tmp_name'][$i], 'upload/' . $filename);
         }
     } else {
         require 'error_upload.php';
