@@ -1,4 +1,7 @@
-<?php require 'logic.php' ?>
+<?php
+require 'logic.php';
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -32,38 +35,44 @@
 
                 <h1>Возможности проекта —</h1>
                 <p>Вести свои личные списки, например покупки в магазине, цели, задачи и многое другое. Делится списками с друзьями и просматривать списки друзей.</p>
-
-
             </td>
             <td class="right-collum-index">
 
                 <div class="project-folders-menu">
                     <ul class="project-folders-v">
-                        <li class="project-folders-v-active"><a href="/index.php?login=yes">Авторизация</a></li>
+                        <li class="project-folders-v-active">
+                            <?php
+                            if (isset($_SESSION['authorized'])) {
+                                echo '<a href="/logout.php">Выход</a></li>';
+                            } else {
+                                echo '<a href="/index.php?login=yes">Авторизация</a></li>';
+                            }
+                            ?>
                         <li><a href="#">Регистрация</a></li>
                         <li><a href="#">Забыли пароль?</a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
-
-                <div class="index-auth" <?php if (!array_key_exists('login', $_GET)) {
-                                            echo 'style="display:none;"';
-                                        } ?>>
-                    <?php
-                    if (isset($successAuth)) {
-                        if (!$successAuth) {
-                            require 'include/error_message.php';
-                        } else {
-                            require 'include/success_message.php';
-                        }
+                <?php
+                if (isset($successAuth)) {
+                    if (!$successAuth) {
+                        require 'include/error_message.php';
+                    } else {
+                        require 'include/success_message.php';
                     }
-                    ?>
-                    <form action="" method="POST">
+                }
+                ?>
+                <div class="index-auth" <?php if (!array_key_exists('login', $_GET)) {
+                                            if (array_key_exists('authorized', $_SESSION)) {
+                                                echo 'style="display:none;"';
+                                            };
+                                        } ?>>
+                    <form action="index.php" method="POST">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="iat">
                                     <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login" value="<?php echo $login; ?>">
+                                    <input id="login_id" size="30" name="login" value="<?php if(isset($_COOKIE['login'])){ echo $_COOKIE['login'];} ?>">
                                 </td>
                             </tr>
                             <tr>
