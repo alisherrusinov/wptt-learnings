@@ -1,0 +1,21 @@
+
+img{
+    max-width: 90%;
+}
+.container{
+    display: flex;
+    flex-direction:row; 
+}
+.blok_img{
+    max-width: 25%;
+}
+span{
+    max-width: 25%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+}
+.check{ 
+    width: 40px;
+    height: 40px;
+}
